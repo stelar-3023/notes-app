@@ -1,7 +1,10 @@
 import chalk from 'chalk';
+import { argv } from 'process';
 import yargs from 'yargs';
 
 import { getNotes } from './notes.js';
+import { addNote, removeNote } from './notes.js';
+
 
 const msg = getNotes();
 console.log(msg);
@@ -30,8 +33,7 @@ yargs.command({
     }
   },
   handler: function (argv) {
-    console.log('Title: ', argv.title);
-    console.log('Note: ', argv.body);
+    addNote(argv.title, argv.body);
   },
 });
 
@@ -39,8 +41,16 @@ yargs.command({
 yargs.command({
   command: 'remove',
   describe: 'Remove a note',
-  handler: function () {
+  builder: {
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string'
+    }
+  },
+  handler: function (argv) {
     console.log('Removing note');
+    removeNote(argv.title);
   },
 });
 
