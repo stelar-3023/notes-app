@@ -2,9 +2,7 @@ import chalk from 'chalk';
 import { argv } from 'process';
 import yargs from 'yargs';
 
-import { getNotes } from './notes.js';
-import { addNote, removeNote } from './notes.js';
-
+import { addNote, getNotes, listNotes, removeNote } from './notes.js';
 
 const msg = getNotes();
 console.log(msg);
@@ -24,13 +22,13 @@ yargs.command({
     title: {
       describe: 'Note title',
       demandOption: true,
-      type: 'string'
+      type: 'string',
     },
     body: {
       describe: 'Note body',
       demandOption: true,
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
   handler(argv) {
     addNote(argv.title, argv.body);
@@ -45,11 +43,11 @@ yargs.command({
     title: {
       describe: 'Note title',
       demandOption: true,
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
   handler(argv) {
-    console.log('Removing note');
+    // console.log('Removing note');
     removeNote(argv.title);
   },
 });
@@ -59,7 +57,8 @@ yargs.command({
   command: 'list',
   describe: 'List your notes',
   handler() {
-    console.log('Listing out all notes');
+    // console.log('Listing out all notes');
+    listNotes();
   },
 });
 
@@ -73,7 +72,6 @@ yargs.command({
 });
 
 yargs.parse();
-
 
 // console.log(process.argv);
 // console.log(yargs.argv);

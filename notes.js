@@ -38,13 +38,23 @@ export const removeNote = (title) => {
 
   // check if a note is removed
   if (notes.length > notesToKeep.length) {
-    console.log(chalk.green.inverse('Note removed!'));
+    console.log(chalk.green.inverse.bold('Note removed!'));
     saveNotes(notesToKeep);
   } else {
-    console.log(chalk.red.inverse('No note found!'));
+    console.log(chalk.red.inverse.bold('No note found!'));
   }
   console.log('Removing note', title);
 };
+
+export const listNotes = () => {
+  // load notes
+  const notes = loadNotes();
+  console.log(chalk.blue.inverse.bold('Your notes:'));
+  // loop through notes & console.log each note
+  notes.forEach((note) => {
+    console.log(note.title);
+  });
+}
 
 const saveNotes = (notes) => {
   const dataJSON = JSON.stringify(notes);
