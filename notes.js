@@ -9,9 +9,10 @@ export const addNote = (title, body) => {
   const notes = loadNotes();
 
   // check if note already exists
-  const duplicateNotes = notes.filter((note) => note.title === title);
+  // const duplicateNotes = notes.filter((note) => note.title === title);
+  const duplicateNote = notes.find((note) => note.title === title);
 
-  if (duplicateNotes.length === 0) {
+  if (!duplicateNote) {
     notes.push({
       title: title,
       body: body,
