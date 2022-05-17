@@ -8,6 +8,8 @@ export const getNotes = () => {
 export const addNote = (title, body) => {
   const notes = loadNotes();
 
+  // debugger;
+
   // check if note already exists
   // const duplicateNotes = notes.filter((note) => note.title === title);
   const duplicateNote = notes.find((note) => note.title === title);
@@ -55,6 +57,17 @@ export const listNotes = () => {
   notes.forEach((note) => {
     console.log(note.title);
   });
+}
+
+export const readNote = (title) => {
+  const notes = loadNotes();
+  const note = notes.find((note) => note.title === title);
+  if (note) {
+    console.log(chalk.blue.inverse.bold(note.title));
+    console.log(note.body);
+  } else {
+    console.log(chalk.red.inverse.bold('No note found!'));
+  }
 }
 
 const saveNotes = (notes) => {

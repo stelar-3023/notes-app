@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import { argv } from 'process';
 import yargs from 'yargs';
 
-import { addNote, getNotes, listNotes, removeNote } from './notes.js';
+import { addNote, getNotes, listNotes, removeNote, readNote } from './notes.js';
 
 const msg = getNotes();
 console.log(msg);
@@ -66,8 +66,15 @@ yargs.command({
 yargs.command({
   command: 'read',
   describe: 'Read a note',
-  handler() {
-    console.log('Reading all notes');
+  builder: {
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    readNote(argv.title);
   },
 });
 
